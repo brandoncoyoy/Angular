@@ -11,7 +11,8 @@ function FoundItems(){
     templateUrl: 'loader/itemsloaderindicator.template.html',
     scope: {
       items: '<',
-      onRemove:'&'
+      onRemove:'&',
+      message:'@'
     },
     controller: FoundItemsDirectiveController,
     controllerAs: 'list',
@@ -28,9 +29,15 @@ function NarrowItDownController(MenuSearchService) {
   var controller = this;
   controller.term ='';
   controller.found = [];
+  controller.message ='';
   controller.Load = function(){
     controller.found = MenuSearchService.getMatchedMenuItems(controller.term).then(function(foundItems){
       controller.found = foundItems;
+      if(controller.found.length===0){
+        controller.message='Nothing found';
+      }else{
+        controller.message='';
+      }
     });
   }
   controller.removeItem = function (itemIndex) {
