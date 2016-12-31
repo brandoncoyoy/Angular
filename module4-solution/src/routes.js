@@ -12,16 +12,21 @@ function RoutesConfig($stateProvider, $urlRouterProvider) {
   $stateProvider
     .state('home', {
       url: '/',
-      templateUrl: 'src/home.template.html'
+      templateUrl: 'src/menudata/home.template.html'
     })
 
     .state('categories', {
       url: '/categories',
-      templateUrl: 'src/categories.template.html'
+      templateUrl: 'src/menudata/categories.template.html',
+      controller: 'CategoriesController as context'
     })
     .state('items', {
-      url: '/items',
-      templateUrl: 'src/items.template.html'
+      url: '/items/{shortName}',
+      templateUrl: 'src/menudata/items.template.html',
+      controller: 'ItemsController as context',
+      resolve: {
+        shortName: ['$stateParams',function ($stateParams) { return $stateParams.shortName; }]
+      }
     });
 }
 
