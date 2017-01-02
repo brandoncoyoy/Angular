@@ -4,12 +4,10 @@
 angular.module('data')
 .controller('ItemsController', ItemsController);
 
-ItemsController.$inject=['MenuDataService','shortName'];
-function ItemsController(MenuDataService,shortName) {
+ItemsController.$inject=['itemsList'];
+function ItemsController(itemsList) {
   var context = this;
-  MenuDataService.getItemsForCategory(shortName).then(function(result){
-    context.items = result;
-  });
+  context.items = itemsList;
 }
 
 })();
