@@ -18,21 +18,14 @@ function RoutesConfig($stateProvider, $urlRouterProvider) {
     .state('categories', {
       url: '/categories',
       templateUrl: 'src/menudata/categories.template.html',
-      controller: 'CategoriesController as context',
-      resolve:{
-        categoriesList:['MenuDataService'.function(MenuDataService){
-          return MenuDataService.getAllCategories();
-        }]
-      }
+      controller: 'CategoriesController as context'
     })
     .state('items', {
       url: '/items/{shortName}',
       templateUrl: 'src/menudata/items.template.html',
       controller: 'ItemsController as context',
       resolve: {
-        itemsList: ['MenuDataService','$stateParams',function (MenuDataService,$stateParams) {
-          return MenuDataService.getItemsForCategory($stateParams.shortName); 
-        }]
+        shortName: ['$stateParams',function ($stateParams) { return $stateParams.shortName; }]
       }
     });
 }
