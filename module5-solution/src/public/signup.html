@@ -1,0 +1,60 @@
+<div id="awards-view" class="container">
+  <h2 class="text-center">Sign Up</h2>
+  <div class="row">
+    <center>
+    <form name='signUpForm' novalidate>
+      <input type="text" name="firstname" placeholder="First name"
+        ng-model="form.user.firstname"
+        required>
+        <span
+          ng-if="signUpForm.firstname.$error.required && signUpForm.firstname.$touched">
+          This field is required
+        </span>
+        <br>
+      <input type="text" name="lastname" placeholder="Last name"
+        ng-model="form.user.lastname"
+        required>
+        <span ng-if="signUpForm.lastname.$error.required && signUpForm.lastname.$touched">
+          This field is required
+        </span>
+        <br>
+      <input type="email" name="email" placeholder="Email"
+        ng-model="form.user.email"
+        required>
+        <span ng-if="signUpForm.email.$error.required && signUpForm.email.$touched">
+          This field is required
+        </span>
+        <span ng-if="signUpForm.email.$invalid && signUpForm.email.$touched && !signUpForm.email.$error.required">
+          Must be a valid email address: handle@domain format
+        </span>
+        <br>
+
+      <input type="text" name="phone" placeholder="Phone ###-###-####"
+        ng-model="form.user.phone"
+        pattern="(\d{3})-(\d{3})-(\d{4})" required>
+        <span ng-if="signUpForm.phone.$error.required && signUpForm.phone.$touched">
+          This field is required
+        </span>
+        <span ng-if="signUpForm.phone.$invalid && signUpForm.phone.$touched && !signUpForm.phone.$error.required">
+          Phone must be in the format ###-###-####.
+        </span>
+        <br>
+      <input type="text" name="favorite" placeholder="Menu favorite"
+        ng-model="form.user.favorite"
+        >
+        <span>
+          {{form.favoriteStatus}}
+        </span>
+        <br>
+      <button
+        ng-disabled="signUpForm.$invalid"
+        ng-click="form.submit()">Submit</button>
+
+        <div style="margin-top: 10px;">
+          <span>{{ form.message }}</span>
+        </div>
+    </form>
+  </center>
+  </div>
+
+</div>
